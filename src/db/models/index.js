@@ -13,4 +13,6 @@ const db = new Sequelize(
 const User = require("./user")(db);
 const Post = require("./post")(db);
 
+Post.belongsTo(User);
+
 module.exports = db;
