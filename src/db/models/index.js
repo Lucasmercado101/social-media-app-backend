@@ -11,6 +11,6 @@ const db = new Sequelize(
 ); //logging false would prevent outputting SQL to the console on execution. Log true to see what you get!
 
 const User = require("./user")(db);
-const Post = require("./user")(db);
+const Post = require("./post")(db);
 
 module.exports = db;
