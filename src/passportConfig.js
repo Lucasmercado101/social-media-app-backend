@@ -1,16 +1,16 @@
-import Passport from "passport";
-import { Strategy as LocalStrategy } from "passport-local";
-import { User } from "./db/models/index";
-import bcrypt from "bcryptjs";
+const Passport = require("passport");
+const { Strategy: LocalStrategy } = require("passport-local");
+const { User } = require("./db/models/index");
+const bcrypt = require("bcryptjs");
 
 /**
- * @param {Passport} passport
+ * @param {import("passport").PassportStatic} passport
  */
 module.exports = (passport) => {
   passport.use(
     "local",
-    new LocalStrategy((loginField, password, done) => {
-      User.findOne({ where: { userName: loginField } }).then((user) => {
+    new LocalStrategy((username, password, done) => {
+      User.findOne({ where: { username } }).then((user) => {
         if (!user) return done(null, false);
         bcrypt.compare(password, user.password, (err, result) => {
           if (err) throw err;
@@ -23,6 +23,7 @@ module.exports = (passport) => {
       });
     })
   );
+
   passport.serializeUser((user, cb) => {
     cb(null, user.id);
   });
