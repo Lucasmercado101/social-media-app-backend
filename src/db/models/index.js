@@ -13,6 +13,9 @@ const db = new Sequelize(
 const User = require("./user")(db);
 const Post = require("./post")(db);
 
+// --- Relations ---
+
 Post.belongsTo(User);
+User.hasMany(Post);
 
 module.exports = { db, User, Post };
