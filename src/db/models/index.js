@@ -15,4 +15,4 @@ const Post = require("./post")(db);
 
 Post.belongsTo(User);
 
-module.exports = db;
+module.exports = { db, User, Post };
