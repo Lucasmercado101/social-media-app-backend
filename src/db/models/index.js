@@ -18,4 +18,6 @@ const Post = require("./post")(db);
 Post.belongsTo(User);
 User.hasMany(Post);
 
+User.hasMany(User, { as: "friends" });
+
 module.exports = { db, User, Post };
