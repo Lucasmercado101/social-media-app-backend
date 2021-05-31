@@ -5,6 +5,8 @@ const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const rootRouter = require("./routes/createRouter");
+const passport = require("passport");
+const passportConfig = require("./passportConfig");
 
 app.use(
   session({
@@ -20,7 +22,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(express.json());
 
-db.sync({ force: true }).then(() => console.log("Synced successfully"));
+app.use(passport.initialize());
+app.use(passport.session());
+passportConfig(passport);
+
+db.sync({ force: false }).then(() => console.log("Synced successfully"));
 
 app.use("/", rootRouter());
 
