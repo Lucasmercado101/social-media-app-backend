@@ -15,9 +15,9 @@ const Post = require("./post")(db);
 
 // --- Relations ---
 
-Post.belongsTo(User);
-User.hasMany(Post);
+Post.belongsTo(User, { foreignKey: "authorId" });
+User.hasMany(Post, { foreignKey: "authorId" });
 
-User.hasMany(User, { as: "friends" });
+User.belongsToMany(User, { as: "friends", through: "userFriends" });
 
 module.exports = { db, User, Post };
