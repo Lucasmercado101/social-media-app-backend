@@ -1,8 +1,9 @@
 const express = require("express");
 const session = require("express-session");
-const db = require("./db/models/index");
+const { db } = require("./db/models/index");
 const app = express();
 const morgan = require("morgan");
+const bodyParser = require("body-parser");
 const rootRouter = require("./routes/createRouter");
 
 app.use(
@@ -13,6 +14,8 @@ app.use(
     name: "social-media-back-login-cookie"
   })
 );
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(morgan("dev"));
 app.use(express.json());
