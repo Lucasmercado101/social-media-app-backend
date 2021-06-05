@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const rootRouter = require("./routes/createRouter");
 const passport = require("passport");
 const passportConfig = require("./passportConfig");
+const cors = require("cors");
 
 const { PORT } = process.env;
 
@@ -18,6 +19,20 @@ app.use(
     name: "social-media-back-login-cookie"
   })
 );
+
+const whitelist = process.env.WHITELISTED_URLS.split(";");
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  }
+};
+
+app.use(cors(corsOptions));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
