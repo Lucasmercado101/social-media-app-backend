@@ -8,6 +8,8 @@ const rootRouter = require("./routes/createRouter");
 const passport = require("passport");
 const passportConfig = require("./passportConfig");
 
+const { PORT } = process.env;
+
 app.use(
   session({
     secret: "secret",
@@ -30,6 +32,6 @@ db.sync({ force: false }).then(() => console.log("Synced successfully"));
 
 app.use("/", rootRouter());
 
-app.listen(2000, () => {
-  console.log("Port started successfully");
+app.listen(PORT, () => {
+  console.log("Port started successfully on port: " + PORT);
 });
