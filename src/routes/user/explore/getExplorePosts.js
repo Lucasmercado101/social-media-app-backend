@@ -36,7 +36,6 @@ module.exports = Router({ mergeParams: true }).get(
       results.results = await Post.findAll({
         offset: startIndex,
         limit: limit
-        // where: {}
       });
       res.json(results);
     } catch (e) {
