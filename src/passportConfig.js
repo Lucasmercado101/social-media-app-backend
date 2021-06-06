@@ -29,7 +29,7 @@ module.exports = (passport) => {
   });
 
   passport.deserializeUser((id, cb) => {
-    User.findOne({ where: { id }, include: { all: true } })
+    User.findOne({ where: { id } })
       .then((user) => {
         cb(false, user);
       })
