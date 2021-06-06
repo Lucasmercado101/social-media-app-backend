@@ -23,10 +23,14 @@ app.use(
 const whitelist = process.env.WHITELISTED_URLS.split(";");
 var corsOptions = {
   origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
+    if (process.env.NODE_ENV === "production") {
+      if (whitelist.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
     } else {
-      callback(new Error("Not allowed by CORS"));
+      callback(null, true);
     }
   },
   credentials: true
