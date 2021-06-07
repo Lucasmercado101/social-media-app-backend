@@ -1,6 +1,6 @@
 const Router = require("express").Router;
 const isLoggedIn = require("../../middleware/isLoggedIn");
-const { Post } = require("../../../db/models/index");
+const { Post, User } = require("../../../db/models/index");
 
 const ROUTE = "/user/explore";
 
@@ -35,7 +35,8 @@ module.exports = Router({ mergeParams: true }).get(
     try {
       results.results = await Post.findAll({
         offset: startIndex,
-        limit: limit
+        limit: limit,
+        include: [{ model: User, attributes: ["firstName", "lastName"] }]
       });
       res.json(results);
     } catch (e) {
