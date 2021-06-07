@@ -8,6 +8,10 @@ module.exports = (db) =>
     lastName: {
       type: DataTypes.STRING(50)
     },
+    profilePictureURL: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     username: {
       type: DataTypes.STRING
     },
