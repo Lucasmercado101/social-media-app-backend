@@ -41,7 +41,8 @@ module.exports = Router({ mergeParams: true }).get(
             model: User,
             attributes: ["firstName", "lastName", "profilePictureURL"]
           }
-        ]
+        ],
+        order: [["createdAt", "DESC"]]
       });
       res.json(results);
     } catch (e) {
