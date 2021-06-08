@@ -36,7 +36,12 @@ module.exports = Router({ mergeParams: true }).get(
       results.results = await Post.findAll({
         offset: startIndex,
         limit: limit,
-        include: [{ model: User, attributes: ["firstName", "lastName"] }]
+        include: [
+          {
+            model: User,
+            attributes: ["firstName", "lastName", "profilePictureURL"]
+          }
+        ]
       });
       res.json(results);
     } catch (e) {
