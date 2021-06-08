@@ -4,6 +4,6 @@ module.exports = {
   updateUserDataSchema: Joi.object({
     firstName: Joi.string().empty("").max(50).optional(),
     lastName: Joi.string().empty("").max(50).optional(),
-    profilePictureURL: Joi.string().empty("").valid(null).optional()
+    profilePictureURL: Joi.string().empty("").allow(null).optional()
   })
 };
