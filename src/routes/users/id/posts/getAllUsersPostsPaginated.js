@@ -50,7 +50,13 @@ module.exports = Router({ mergeParams: true }).get(ROUTE, async (req, res) => {
     results.results = await user.getPosts({
       offset: startIndex,
       limit: limit,
-      order: [["createdAt", "DESC"]]
+      order: [["createdAt", "DESC"]],
+      include: [
+        {
+          model: User,
+          attributes: ["firstName", "lastName", "profilePictureURL"]
+        }
+      ]
     });
     res.json(results);
   } catch (e) {
