@@ -7,6 +7,8 @@ module.exports = Router({ mergeParams: true }).get(ROUTE, async (req, res) => {
   const { userId } = req.params;
   if (!userId) return res.sendStatus(400);
 
+  //TODO: validation and null checks
+
   res.json(
     await User.findOne({
       where: { id: userId },
