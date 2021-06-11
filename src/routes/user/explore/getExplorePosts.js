@@ -40,12 +40,30 @@ module.exports = Router({ mergeParams: true }).get(
           {
             model: User,
             attributes: ["firstName", "lastName", "profilePictureURL"]
+          },
+          {
+            model: User,
+            as: "likes",
+            attributes: ["id"],
+            through: {
+              attributes: []
+            },
+            distinct: true
+          },
+          {
+            model: User,
+            as: "dislikes",
+            attributes: ["id"],
+            through: {
+              attributes: []
+            }
           }
         ],
         order: [["createdAt", "DESC"]]
       });
       res.json(results);
     } catch (e) {
+      console.log(e);
       res.sendStatus(500);
     }
   }

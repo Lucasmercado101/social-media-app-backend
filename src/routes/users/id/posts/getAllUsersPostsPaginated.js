@@ -53,6 +53,23 @@ module.exports = Router({ mergeParams: true }).get(ROUTE, async (req, res) => {
         {
           model: User,
           attributes: ["firstName", "lastName", "profilePictureURL"]
+        },
+        {
+          model: User,
+          as: "likes",
+          attributes: ["id"],
+          through: {
+            attributes: []
+          },
+          distinct: true
+        },
+        {
+          model: User,
+          as: "dislikes",
+          attributes: ["id"],
+          through: {
+            attributes: []
+          }
         }
       ]
     });
