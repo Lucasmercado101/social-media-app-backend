@@ -44,8 +44,6 @@ module.exports = Router({ mergeParams: true }).get(ROUTE, async (req, res) => {
     };
   }
 
-  console.log(results);
-
   try {
     results.results = await user.getPosts({
       offset: startIndex,
