@@ -8,7 +8,7 @@ const db = new Sequelize(
   {
     logging: false
   }
-); //logging false would prevent outputting SQL to the console on execution. Log true to see what you get!
+);
 
 const User = require("./user")(db);
 const Post = require("./post")(db);
@@ -17,6 +17,12 @@ const Post = require("./post")(db);
 
 Post.belongsTo(User, { foreignKey: "authorId" });
 User.hasMany(Post, { foreignKey: "authorId" });
+
+Post.belongsToMany(User, { through: "PostLikes", as: "likes" });
+User.belongsToMany(Post, { through: "PostLikes", as: "postsLiked" });
+
+Post.belongsToMany(User, { through: "PostDislikes", as: "dislikes" });
+User.belongsToMany(Post, { through: "PostDislikes", as: "postsDisliked" });
 
 User.belongsToMany(User, { as: "friends", through: "userFriends" });
 
