@@ -16,7 +16,7 @@ const Post = require("./post")(db);
 // --- Relations ---
 
 Post.belongsTo(User, { foreignKey: "authorId" });
-User.hasMany(Post, { foreignKey: "authorId" });
+User.hasMany(Post, { foreignKey: "authorId", as: "userPosts" });
 
 Post.belongsToMany(User, { through: "PostLikes", as: "likes" });
 User.belongsToMany(Post, { through: "PostLikes", as: "postsLiked" });
@@ -25,5 +25,15 @@ Post.belongsToMany(User, { through: "PostDislikes", as: "dislikes" });
 User.belongsToMany(Post, { through: "PostDislikes", as: "postsDisliked" });
 
 User.belongsToMany(User, { as: "friends", through: "userFriends" });
+
+User.belongsToMany(User, {
+  as: "friendRequestsPending",
+  through: "userFriendRequestsPending"
+});
+
+User.belongsToMany(User, {
+  as: "friendRequestsSent",
+  through: "userFriendRequestsSent"
+});
 
 module.exports = { db, User, Post };
