@@ -25,7 +25,7 @@ module.exports = Router({ mergeParams: true }).get(ROUTE, async (req, res) => {
 
   const results = {};
 
-  const [{ count }] = await user.getPosts({
+  const [{ count }] = await user.getUserPosts({
     attributes: [[Sequelize.fn("COUNT", Sequelize.col("id")), "count"]],
     raw: true
   });
@@ -45,7 +45,7 @@ module.exports = Router({ mergeParams: true }).get(ROUTE, async (req, res) => {
   }
 
   try {
-    results.results = await user.getPosts({
+    results.results = await user.getUserPosts({
       offset: startIndex,
       limit: limit,
       order: [["createdAt", "DESC"]],
