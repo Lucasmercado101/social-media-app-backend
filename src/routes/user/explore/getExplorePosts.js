@@ -39,7 +39,7 @@ module.exports = Router({ mergeParams: true }).get(
         include: [
           {
             model: User,
-            attributes: ["firstName", "lastName", "profilePictureURL"]
+            attributes: ["firstName", "lastName", "profilePictureURL", "id"]
           },
           {
             model: User,
