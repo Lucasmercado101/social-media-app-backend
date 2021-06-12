@@ -8,7 +8,7 @@ module.exports = Router({ mergeParams: true }).post(
   async (req, res) => {
     //TODO: validation
     req.body.content = req.body.content.trim();
-    const newPost = await req.user.createPost(req.body);
+    const newPost = await req.user.createUserPost(req.body);
     res.json(newPost);
   }
 );

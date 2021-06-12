@@ -6,5 +6,5 @@ const ROUTE = "/user/posts";
 module.exports = Router({ mergeParams: true }).get(
   ROUTE,
   isLoggedIn,
-  async (req, res) => res.json(await req.user.getPosts())
+  async (req, res) => res.json(await req.user.getUserPosts())
 );
