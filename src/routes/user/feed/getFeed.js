@@ -17,8 +17,6 @@ module.exports = Router({ mergeParams: true }).get(
 
     const results = {};
 
-    // console.log(Object.keys(Object.getPrototypeOf(req.user)));
-    // all posts from the user's friends and the user himself
     const friendsIds = await req.user
       .getFriends({
         attributes: ["id"],
